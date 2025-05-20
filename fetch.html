@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemplo AJAX com Fetch</title>
+</head>
+<body>
+  <h1>Exemplo AJAX com Fetch</h1>
+  <button onclick="carregarDados()">Carregar Dados</button>
+  <div id="resultado"></div>
+
+  <script>
+    function carregarDados() {
+      fetch("dados.json")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Erro ao carregar os dados: " + response.status);
+          }
+          return response.json();
+        })
+        .then(data => {
+          document.getElementById("resultado").innerText = "Nome: " + data.nome;
+        })
+        .catch(error => {
+          document.getElementById("resultado").innerText = "Erro: " + error.message;
+        });
+    }
+  </script>
+</body>
+</html>

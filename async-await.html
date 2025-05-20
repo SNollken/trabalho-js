@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemplo AJAX com Async/Await</title>
+</head>
+<body>
+  <h1>Exemplo AJAX com Async/Await</h1>
+  <button onclick="carregarDados()">Carregar Dados</button>
+  <div id="resultado"></div>
+
+  <script>
+    async function carregarDados() {
+      try {
+        const resposta = await fetch("dados.json");
+        if (!resposta.ok) {
+          throw new Error("Erro HTTP: " + resposta.status);
+        }
+        const dados = await resposta.json();
+        document.getElementById("resultado").innerText = "Nome: " + dados.nome;
+      } catch (erro) {
+        document.getElementById("resultado").innerText = "Erro: " + erro.message;
+      }
+    }
+  </script>
+</body>
+</html>

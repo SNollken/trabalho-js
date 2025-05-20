@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemplo AJAX com Promises</title>
+</head>
+<body>
+  <h1>Exemplo AJAX com Promises</h1>
+  <button onclick="carregarDados()">Carregar Dados</button>
+  <div id="resultado"></div>
+
+  <script>
+    function obterDados() {
+      return new Promise((resolve, reject) => {
+        fetch("dados.json")
+          .then(response => {
+            if (!response.ok) {
+              reject("Erro HTTP: " + response.status);
+            } else {
+              return response.json();
+            }
+          })
+          .then(data => resolve(data))
+          .catch(error => reject("Erro na requisição: " + error));
+      });
+    }
+
+    function carregarDados() {
+      obterDados()
+        .then(dados => {
+          document.getElementById("resultado").innerText = "Nome: " + dados.nome;
+        })
+        .catch(erro => {
+          document.getElementById("resultado").innerText = erro;
+        });
+    }
+  </script>
+</body>
+</html>
