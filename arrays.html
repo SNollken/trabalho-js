@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Método de Arrays</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #000;
+      padding: 2rem;
+    }
+
+    .container {
+      background-color: #fff;
+      max-width: 700px;
+      margin: auto;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .bloco {
+      margin-bottom: 2rem;
+    }
+
+    .titulo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .descricao {
+      font-size: 1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .linha {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .input-texto {
+      flex: 1;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    .input-texto:focus {
+      border-color: #00c000;
+      box-shadow: 0 0 5px rgba(0, 192, 0, 0.3);
+    }
+
+    .botao {
+      background-color: #00c000;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .botao:hover {
+      background-color: #00a000;
+    }
+
+    .resultado {
+      color: green;
+      font-weight: bold;
+      margin-top: 0.5rem;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="titulo">Método de Arrays</h1>
+
+    <!-- Lista dinâmica -->
+    <div class="bloco" style="background-color: rgba(254, 254, 222, 0.687); padding: 10px; border-radius:16px">
+      <label for="input-lista" class="titulo">Lista</label>
+      <p id="exibe-lista" class="resultado">[]</p>
+      <p class="descricao">Escreva o que quiser para formar uma lista:</p>
+      <div class="linha">
+        <input type="text" id="input-lista" placeholder="Insira texto separado por vírgula" class="input-texto">
+        <button class="botao" id="btn-lista">Executar</button>
+      </div>
+    </div>
+
+    <!-- indexOf -->
+    <div class="bloco">
+      <p class="descricao">Busque o índice com <code>indexOf()</code>:</p>
+      <div class="linha">
+        <input type="text" id="input-indexof" placeholder="Insira um valor" class="input-texto">
+        <button class="botao" id="btn-indexof">Executar</button>
+      </div>
+      <p class="resultado" id="res-indexof"></p>
+    </div>
+
+    <!-- lastIndexOf -->
+    <div class="bloco">
+      <p class="descricao">Busque o último índice com <code>lastIndexOf()</code>:</p>
+      <div class="linha">
+        <input type="text" id="input-lastindexof" placeholder="Insira um valor" class="input-texto">
+        <button class="botao" id="btn-lastindexof">Executar</button>
+      </div>
+      <p class="resultado" id="res-lastindexof"></p>
+    </div>
+
+    <!-- includes -->
+    <div class="bloco">
+      <p class="descricao">Verifique se um valor existe com <code>includes()</code>:</p>
+      <div class="linha">
+        <input type="text" id="input-includes" placeholder="Insira um valor" class="input-texto">
+        <button class="botao" id="btn-includes">Executar</button>
+      </div>
+      <p class="resultado" id="res-includes"></p>
+    </div>
+
+    <!-- find -->
+    <div class="bloco">
+      <p class="descricao">Encontre o primeiro valor com <code>find()</code>:</p>
+      <div class="linha">
+        <input type="text" id="input-find" placeholder="Insira um valor" class="input-texto">
+        <button class="botao" id="btn-find">Executar</button>
+      </div>
+      <p class="resultado" id="res-find"></p>
+    </div>
+
+    <!-- findIndex -->
+    <div class="bloco">
+      <p class="descricao">Encontre o índice com <code>findIndex()</code>:</p>
+      <div class="linha">
+        <input type="text" id="input-findindex" placeholder="Insira um valor" class="input-texto">
+        <button class="botao" id="btn-findindex">Executar</button>
+      </div>
+      <p class="resultado" id="res-findindex"></p>
+    </div>
+
+    <!-- findLast -->
+    <div class="bloco">
+      <p class="descricao">Encontre o último valor com <code>findLast()</code>:</p>
+      <div class="linha">
+        <input type="text" id="input-findlast" placeholder="Insira um valor" class="input-texto">
+        <button class="botao" id="btn-findlast">Executar</button>
+      </div>
+      <p class="resultado" id="res-findlast"></p>
+    </div>
+
+    <!-- findLastIndex -->
+    <div class="bloco">
+      <p class="descricao">Encontre o último índice com <code>findLastIndex()</code>:</p>
+      <div class="linha">
+        <input type="text" id="input-findLastindex" placeholder="Insira um valor" class="input-texto">
+        <button class="botao" id="btn-findLastindex">Executar</button>
+      </div>
+      <p class="resultado" id="res-findLastindex"></p>
+    </div>
+  </div>
+
+  <script>
+    // Lista principal
+    let lista = [];
+
+    const inputLista = document.getElementById('input-lista');
+    const btnLista = document.getElementById('btn-lista');
+    const exibeLista = document.getElementById('exibe-lista');
+
+    btnLista.addEventListener('click', () => {
+      const texto = inputLista.value.trim();
+      lista = texto ? texto.split(',').map(item => item.trim()).filter(item => item !== '') : [];
+      exibeLista.textContent = JSON.stringify(lista);
+    });
+
+    function exibirResultado(id, valor) {
+      document.getElementById(id).textContent = valor;
+    }
+
+    document.getElementById('btn-indexof').addEventListener('click', () => {
+      const valor = document.getElementById('input-indexof').value.trim();
+      const resultado = lista.indexOf(valor);
+      exibirResultado('res-indexof', resultado !== -1 ? `Índice: ${resultado}` : 'Valor não encontrado');
+    });
+
+    document.getElementById('btn-lastindexof').addEventListener('click', () => {
+      const valor = document.getElementById('input-lastindexof').value.trim();
+      const resultado = lista.lastIndexOf(valor);
+      exibirResultado('res-lastindexof', resultado !== -1 ? `Último índice: ${resultado}` : 'Valor não encontrado');
+    });
+
+    document.getElementById('btn-includes').addEventListener('click', () => {
+      const valor = document.getElementById('input-includes').value.trim();
+      const resultado = lista.includes(valor);
+      exibirResultado('res-includes', resultado ? 'Valor existe na lista' : 'Valor não encontrado');
+    });
+
+    document.getElementById('btn-find').addEventListener('click', () => {
+      const valor = document.getElementById('input-find').value.trim();
+      const resultado = lista.find(item => item === valor);
+      exibirResultado('res-find', resultado ? `Encontrado: ${resultado}` : 'Nada encontrado com find()');
+    });
+
+    document.getElementById('btn-findindex').addEventListener('click', () => {
+      const valor = document.getElementById('input-findindex').value.trim();
+      const resultado = lista.findIndex(item => item === valor);
+      exibirResultado('res-findindex', resultado !== -1 ? `Índice encontrado: ${resultado}` : 'Valor não encontrado com findIndex()');
+    });
+
+    document.getElementById('btn-findlast').addEventListener('click', () => {
+      const valor = document.getElementById('input-findlast').value.trim();
+      const resultado = lista.findLast(item => item === valor);
+      exibirResultado('res-findlast', resultado ? `Último valor: ${resultado}` : 'Nada encontrado com findLast()');
+    });
+    document.getElementById('btn-findLastindex').addEventListener('click', () => {
+      const valor = document.getElementById('input-findLastindex').value.trim();
+      const resultado = lista.findLastIndex(item => item === valor);
+      exibirResultado('res-findLastindex', resultado !== -1 ? `Último índice encontrado: ${resultado}` : 'Valor não encontrado com findLastIndex()');
+    });
+  </script>
+</body>
+</html>
